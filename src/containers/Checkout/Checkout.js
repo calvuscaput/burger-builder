@@ -28,7 +28,7 @@ class Checkout extends Component {
         ingredients={this.props.ings}
         checkoutCanceled={this.checkoutCanceledHandler}
         checkoutContinued={this.checkoutContinuedHandler}/>
-       <Route path={this.props.match.path + '/contact-data'}
+       <Route path={process.env.PUBLIC_URL + this.props.match.path + '/contact-data'}
         component={ContactData}/>
       </div>
       
