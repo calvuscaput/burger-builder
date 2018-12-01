@@ -16,11 +16,12 @@ class Auth extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'email',
-          placeholder: 'E-mail Address'
+          placeholder: 'Mail Address'
         },
         value: '',
         validation: {
           required: true,
+          isEmail: true
         },
         valid: false,
         touched: false
@@ -38,11 +39,30 @@ class Auth extends Component {
         },
         valid: false,
         touched: false
-      },
+      }
     },
-    isSignUp: true
+    isSignup: true
   }
 
+  errorHandler = () => {   
+    switch (this.props.error.message) {
+      case 'EMAIL_EXISTS':
+        return 'The email address is already in use by another account.'    
+      case 'OPERATION_NOT_ALLOWED':
+        return 'Password sign-in is disabled.'    
+      case 'TOO_MANY_ATTEMPTS_TRY_LATER':
+        return 'We have blocked all requests from this device due to unusual activity. Try again later.'    
+      case 'EMAIL_NOT_FOUND':
+        return 'There is no user with this identifier'    
+      case 'INVALID_PASSWORD':
+        return 'Invalid password.'    
+      case 'USER_DISABLED':
+        return 'The user account has been disabled by an administrator.'    
+      default:
+        return 'Something went wrong! Try again later.';
+    }
+
+  }
   componentDidMount () {
     if (!this.props.buildingBurger && this.props.authRedirectPath !=='/') {
       this.props.onSetAuthRedirctPath()
@@ -102,7 +122,7 @@ class Auth extends Component {
     let errorMessage = null;
     if (this.props.error) {
       errorMessage = (
-        <p>{this.props.error.message}</p>
+        <p>{this.errorHandler()}</p>
       );
     }
 

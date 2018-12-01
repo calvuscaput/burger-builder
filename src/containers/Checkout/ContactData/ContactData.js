@@ -40,7 +40,7 @@ class ContactData extends Component {
         valid: false,
         touched: false
       },
-      zipcode: {
+      zipCode: {
         elementType: 'input',
         elementConfig: {
           type: 'text',
@@ -50,7 +50,8 @@ class ContactData extends Component {
         validation: {
           required: true,
           minLength: 5,
-          maxLength: 5
+          maxLength: 6,
+          isNumeric: true
         },
         valid: false,
         touched: false
@@ -76,7 +77,8 @@ class ContactData extends Component {
         },
         value: '',
         validation: {
-          required: true
+          required: true,
+          isEmail: true
         },
         valid: false,
         touched: false
@@ -84,15 +86,20 @@ class ContactData extends Component {
       deliveryMethod: {
         elementType: 'select',
         elementConfig: {
-          options: [
-            {value: 'fastest', displayValue: 'Fastest'},
-            {value: 'cheapest', displayValue: 'Cheapest'}
+          options: [{
+              value: 'fastest',
+              displayValue: 'Fastest'
+            },
+            {
+              value: 'cheapest',
+              displayValue: 'Cheapest'
+            }
           ]
         },
         value: 'fastest',
         validation: {},
         valid: true
-      },
+      }
     },
     formIsValid: false
   }
